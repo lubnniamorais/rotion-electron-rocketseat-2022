@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "jsx": "react-jsx",
+    "types": ["node"],
     "jsxImportSource": "react", // garante que vem do pacote react
     "strict": true
   }

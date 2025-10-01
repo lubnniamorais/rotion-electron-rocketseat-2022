@@ -13,6 +13,10 @@ export default defineConfig({
     plugins: [externalizeDepsPlugin()],
   },
   renderer: {
+    // Para criar variáveis globais
+    define: {
+      'process.platform': JSON.stringify(process.platform),
+    },
     css: {
       postcss: {
         plugins: [

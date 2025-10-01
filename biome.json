@@ -30,7 +30,8 @@
       "correctness": {
         "useExhaustiveDependencies": "off",
         "noUnreachable": "off",
-        "noUnusedImports": "warn"
+        "noUnusedImports": "warn",
+        "useUniqueElementIds": "off"
       },
       "complexity": {
         "noExtraBooleanCast": "off",
@@ -39,7 +40,8 @@
         "noUselessLoneBlockStatements": "off",
         "noForEach": "off",
         "useLiteralKeys": "off",
-        "useArrowFunction": "off"
+        "useArrowFunction": "off",
+        "noUselessEmptyExport": "off"
       },
       "style": {
         "noUselessElse": "off",

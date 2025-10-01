@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+html {
+  overflow: hidden
+}
+
+header {
+  height: 30px;
+  background: #17141f;
+  -webkit-app-region: drag; /* permite arrastar a janela */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+header .window-controls button {
+  -webkit-app-region: no-drag; /* botões não arrastam */
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+}

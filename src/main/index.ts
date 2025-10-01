@@ -7,15 +7,22 @@ function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
-    show: false,
+    frame: false,
+    // show: false,
     autoHideMenuBar: true,
     backgroundColor: '#17141f',
-    ...(process.platform === 'linux'
-      ? { icon: path.join(__dirname, '../../build/icon.png') }
-      : {}),
+    icon:
+      process.platform === 'win32'
+        ? path.join(__dirname, '../../build/icon.ico')
+        : path.join(__dirname, '../../build/icon.png'),
+    // ...(process.platform === 'linux'
+    //   ? { icon: path.join(__dirname, '../../build/icon.png') }
+    //   : { icon: path.join(__dirname, '../../build/icon.ico') }),
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
       sandbox: false,
+      contextIsolation: true,
+      nodeIntegration: false,
     },
   });
 
@@ -55,6 +62,25 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'));
+
+  ipcMain.on('window-minimize', (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender);
+    win?.minimize();
+  });
+
+  ipcMain.on('window-maximize', (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender);
+    if (win?.isMaximized()) {
+      win.unmaximize();
+    } else {
+      win?.maximize();
+    }
+  });
+
+  ipcMain.on('window-close', (event) => {
+    const win = BrowserWindow.fromWebContents(event.sender);
+    win?.close();
+  });
 
   createWindow();
 

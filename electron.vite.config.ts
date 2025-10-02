@@ -29,6 +29,8 @@ export default defineConfig({
     resolve: {
       alias: {
         '@renderer': path.resolve('src/renderer/src'),
+        '@': path.resolve(__dirname, 'src'),
+        '@/lib': path.resolve(__dirname, 'src/lib'),
       },
     },
     plugins: [react()],

@@ -16,15 +16,12 @@
     "types": ["node"],
     "jsxImportSource": "react", // garante que vem do pacote react
     "incremental": true,
+    "baseUrl": ".", // base do projeto
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/lib/*": ["src/lib/*"]
     }
   },
-  "include": [
-    "src",
-    "src/types/**/*.d.ts",
-    "next-env.d.ts",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["src", "src/types/**/*.d.ts"],
   "exclude": ["node_modules"]
 }

@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import path from 'node:path';
 import { electronApp, is, optimizer } from '@electron-toolkit/utils';
+import { registerRoute } from '../lib/electron-router-dom';
 
 function createWindow(): void {
   // Create the browser window.
@@ -8,7 +9,6 @@ function createWindow(): void {
     width: 900,
     height: 670,
     frame: false,
-    // show: false,
     autoHideMenuBar: true,
     backgroundColor: '#17141f',
     icon:
@@ -21,9 +21,13 @@ function createWindow(): void {
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
       sandbox: false,
-      contextIsolation: true,
-      nodeIntegration: false,
     },
+  });
+
+  registerRoute({
+    id: 'main',
+    browserWindow: mainWindow,
+    htmlFile: path.join(__dirname, '../renderer/index.html'),
   });
 
   mainWindow.on('ready-to-show', () => {
@@ -48,7 +52,7 @@ function createWindow(): void {
 }
 
 if (process.platform === 'darwin') {
-  // mudar o ícone do dock
+  // Esse comando é para mudar o ícone do dock no Mac
   app.dock?.setIcon(path.resolve(__dirname, 'icon.png'));
 }
 
@@ -70,10 +74,14 @@ app.whenReady().then(() => {
 
   ipcMain.on('window-maximize', (event) => {
     const win = BrowserWindow.fromWebContents(event.sender);
-    if (win?.isMaximized()) {
+    if (!win) return;
+
+    if (win.isMaximized()) {
       win.unmaximize();
+      win.webContents.send('window-state', false);
     } else {
-      win?.maximize();
+      win.maximize();
+      win.webContents.send('window-state', true);
     }
   });
 

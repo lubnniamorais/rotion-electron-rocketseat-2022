@@ -8,6 +8,7 @@ declare global {
       minimize: () => void;
       maximize: () => void;
       close: () => void;
+      onWindowState: (callback: (isMaximized: boolean) => void) => void;
     };
   }
 }

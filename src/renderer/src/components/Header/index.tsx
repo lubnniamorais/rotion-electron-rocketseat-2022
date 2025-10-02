@@ -1,10 +1,25 @@
 import clsx from 'clsx';
-import { Code, CaretDoubleRight, TrashSimple } from 'phosphor-react';
+import { useEffect, useState } from 'react';
+import {
+  Code,
+  CaretDoubleRight,
+  TrashSimple,
+  Minus,
+  Square,
+  X,
+} from 'phosphor-react';
 import * as Breadcrumbs from './Breadcrumbs';
 
 export function Header() {
   const isMacOS = process.platform === 'darwin';
   const isSidebarOpen = true;
+  const [isMaximized, setIsMaximized] = useState(false);
+
+  useEffect(() => {
+    window.electronButton.onWindowState((maximized) => {
+      setIsMaximized(maximized);
+    });
+  }, []);
 
   return (
     <div
@@ -47,22 +62,34 @@ export function Header() {
         </button>
       </div>
 
-      {/* BOTÕES */}
-      <div className='window-controls'>
+      {/* Botões estilo Windows */}
+      <div className='inline-flex region-no-drag ml-auto window-controls'>
+        {/* Minimizar */}
         <button
-          className='px-3'
+          className='w-10 h-8 flex items-center justify-center hover:bg-gray-700 text-gray-300 hover:text-white'
           onClick={() => window.electronButton.minimize()}
         >
-          —
+          <Minus weight='bold' className='h-4 w-4' />
         </button>
+
+        {/* Maximizar / Restaurar */}
         <button
-          className='px-3'
+          className='w-10 h-8 flex items-center justify-center hover:bg-gray-700 text-gray-300 hover:text-white'
           onClick={() => window.electronButton.maximize()}
         >
-          □
+          {isMaximized ? (
+            <Square weight='bold' className='h-3.5 w-3.5' /> // Restaurar
+          ) : (
+            <Square weight='bold' className='h-4 w-4' /> // Maximizar
+          )}
         </button>
-        <button className='px-3' onClick={() => window.electronButton.close()}>
-          ✕
+
+        {/* Fechar */}
+        <button
+          className='w-10 h-8 flex items-center justify-center hover:bg-red-600 text-gray-300 hover:text-white'
+          onClick={() => window.electronButton.close()}
+        >
+          <X weight='bold' className='h-4 w-4' />
         </button>
       </div>
     </div>

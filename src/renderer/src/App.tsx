@@ -1,7 +1,9 @@
+import './styles/global.css';
+
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
-import { Routes } from './Routes';
-import './styles/global.css';
+
+import { Routes } from './routes';
 
 export function App() {
   return (
@@ -9,8 +11,8 @@ export function App() {
       <Sidebar />
       <div className='flex flex-1 flex-col max-h-screen'>
         <Header />
+
         <Routes />
-        oiiiiiiii
       </div>
     </div>
   );

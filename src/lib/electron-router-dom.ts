@@ -1,7 +1,7 @@
 import { createElectronRouter } from 'electron-router-dom';
 
 export const { Router, registerRoute } = createElectronRouter({
-  port: 3000, // a porta em que o seu servidor React está rodando (opcional, porta padrão é 3000)
+  port: 5173, // a porta em que o seu servidor React está rodando (opcional, porta padrão é 3000)
 
   types: {
     /**

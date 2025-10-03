@@ -1,26 +1,30 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
     "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "react-jsx",
-    "types": ["node"],
-    "jsxImportSource": "react", // garante que vem do pacote react
-    "incremental": true,
-    "baseUrl": ".", // base do projeto
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/lib/*": ["src/lib/*"]
+      "@/*": ["*"],
+      "@/lib/*": ["lib/*"]
     }
+    // "baseUrl": ".",
+    // "paths": {
+    //   "*": ["./src/*"],
+    //   "~/*": ["./*"]
+    // }
   },
   "include": ["src", "src/types/**/*.d.ts"],
   "exclude": ["node_modules"]

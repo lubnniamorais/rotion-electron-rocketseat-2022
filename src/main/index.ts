@@ -24,11 +24,17 @@ function createWindow(): void {
     },
   });
 
+  // Importante: registrar a rota (a lib gerencia o loadURL/loadFile)
   registerRoute({
     id: 'main',
     browserWindow: mainWindow,
-    htmlFile: path.join(__dirname, '../renderer/index.html'),
+    htmlFile: path.join(__dirname, '../renderer/index.html'), // usado em produção
   });
+
+  console.log(
+    '[main] registerRoute called, URL =>',
+    mainWindow.webContents.getURL()
+  );
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
@@ -40,15 +46,15 @@ function createWindow(): void {
   });
 
   // Abre as ferramentas de desenvolvedor
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL']);
-  } else {
-    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
-  }
+  // if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+  //   mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL']);
+  // } else {
+  //   mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+  // }
 }
 
 if (process.platform === 'darwin') {

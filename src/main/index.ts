@@ -6,8 +6,8 @@ import { registerRoute } from '../lib/electron-router-dom';
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1100,
+    height: 700,
     frame: false,
     autoHideMenuBar: true,
     backgroundColor: '#17141f',
@@ -31,10 +31,10 @@ function createWindow(): void {
     htmlFile: path.join(__dirname, '../renderer/index.html'), // usado em produção
   });
 
-  console.log(
-    '[main] registerRoute called, URL =>',
-    mainWindow.webContents.getURL()
-  );
+  // console.log(
+  //   '[main] registerRoute called, URL =>',
+  //   mainWindow.webContents.getURL()
+  // );
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
